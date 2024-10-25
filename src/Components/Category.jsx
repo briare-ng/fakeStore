@@ -55,5 +55,6 @@ export default Category;
 
 const CardList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 `;

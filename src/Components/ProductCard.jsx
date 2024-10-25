@@ -1,15 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import CartPlus from "../assets/icons/cartPlus";
 import { Link } from "react-router-dom";
 import Stars from "../assets/icons/Stars";
+import { addToCart } from "../reducers/cartDetails";
 
 function ProductCard({ id, title, price, image, rating }) {
   const [qty, SetQty] = useState(0);
-
-  const addToCart = (e) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = (e) => {
     e.preventDefault();
     console.log(qty + " added of " + title + " in the cart");
+    const productData = {
+      id,
+      title,
+      price,
+      image,
+      qty,
+    };
+    console.log("productData", productData);
+    dispatch(addToCart(productData));
   };
 
   return (
@@ -23,7 +34,7 @@ function ProductCard({ id, title, price, image, rating }) {
           <Stars width="1.5rem" height="1.5rem" /> /{rating["count"]} votes
         </Rate>
       </Link>
-      <Form onSubmit={addToCart}>
+      <Form onSubmit={handleAddToCart}>
         <Qty
           type="number"
           name="qty"
@@ -32,6 +43,7 @@ function ProductCard({ id, title, price, image, rating }) {
             SetQty(e.target.value);
           }}
           min="0"
+          value={qty}
         />
         <Btn id={id} type="submit">
           <CartPlus width="1.5em" height="1.5em" />
@@ -64,6 +76,7 @@ const Image = styled.img`
   max-width: 150px;
   max-height: 250px;
   flex: 1 1 0;
+  margin-top: 1rem;
 `;
 
 const Title = styled.p`
@@ -76,6 +89,7 @@ const Title = styled.p`
 
 const Rate = styled.p`
   display: flex;
+  color: rgb(44, 34, 84);
   font-size: 0.8rem;
   font-weight: 400;
   align-items: center;
@@ -107,14 +121,20 @@ const Qty = styled.input`
   border-radius: 4px;
   padding: 0.2rem;
   text-align: center;
+  margin-bottom: 0.25rem;
   &:hover {
     border: 2px solid rgb(204, 204, 255);
   }
 `;
 const Btn = styled.button`
-  border: 1px solid rgb(163, 163, 204);
   padding: 0.3rem 1.2rem;
+  box-shadow: inset 4px 3px 4px rgba(0, 0, 255, 0.2),
+    1px 1px rgba(0, 0, 255, 0.2);
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgba(0, 0, 255, 0.2);
+  transition-duration: 0.3s;
   &:hover {
-    border: 2px solid rgb(122, 122, 153);
+    border: 1px solid rgb(134, 138, 160);
+    transform: scale(1.05);
   }
 `;

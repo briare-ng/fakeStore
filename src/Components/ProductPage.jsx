@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Loader from "./loader";
 import { useParams } from "react-router-dom";
 import CartPlus from "../assets/icons/cartPlus";
+import Stars from "../assets/icons/Stars";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../reducers/cartDetails";
 
 function ProductPage() {
   const [results, setResults] = useState([]);
@@ -31,10 +34,19 @@ function ProductPage() {
         setIsLoaded(true);
       });
   }, []);
-
-  const addToCart = (e) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = (e) => {
     e.preventDefault();
     console.log(qty + " added of " + results.title + " in the cart");
+    const productData = {
+      id: results.id,
+      title: results.title,
+      price: results.price,
+      image: results.image,
+      qty: qty,
+    };
+    console.log("productData", productData);
+    dispatch(addToCart(productData));
   };
 
   if (error) {
@@ -54,12 +66,13 @@ function ProductPage() {
           <Image src={results.image} alt={`${results.title}_picture`}></Image>
           <Description>{results.description}</Description>
           <Price>{results.price} €</Price>
-          <p>
-            rated {results.rating["rate"]}/5 with {results.rating["count"]}{" "}
+          <Rate>
+            rated {results.rating["rate"]}
+            <Stars width="1.5rem" height="1.5rem" /> /{results.rating["count"]}{" "}
             votes
-          </p>
+          </Rate>{" "}
           <p>category {results.category}</p>
-          <Form onSubmit={addToCart}>
+          <Form onSubmit={handleAddToCart}>
             <label htmlFor={`id_${results.title}`}>Buy :</label>
             <Qty
               type="number"
@@ -106,11 +119,20 @@ const Title = styled.p`
   color: rgb(44, 34, 84);
   text-shadow: 3px 3px 5px rgb(164, 165, 176);
 `;
-
+const Rate = styled.p`
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 400;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  color: rgb(44, 34, 84);
+`;
 const Description = styled.p`
   font-size: 1.2rem;
   font-weight: 400;
   margin: 3rem;
+  color: rgb(44, 34, 84);
 `;
 
 const Price = styled.p`

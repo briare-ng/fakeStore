@@ -39,10 +39,10 @@ const Router = () => {
         {/* les "Route" pour chaque "category" */}
         {routes} 
         {/* <Route path="/register" element={<Register />} /> */}
-        <Route path="/login" element={<Login />} />
-        <Route element={<PrivateRoutes />}>
+        {/* <Route path="/login" element={<Login />} />
+        <Route element={<PrivateRoutes />}> */}
         <Route path="/Cart" element={<UserCart />} />
-        </Route>
+        {/* </Route> */}
       </Routes>
       <Footer/>
     </BrowserRouter>
