@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import reactLogo from "../assets/react.svg";
-import viteLogo from "../assets/vite.svg";
+
 import styled from "styled-components";
 import Cart from "../assets/icons/Cart";
 import { useSelector } from "react-redux";
+import Input from "./Input";
+import { useEffect, useState } from "react";
+import { Search } from "../assets/icons/Search";
 
 export default function Header() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const deconnect = () => {
   //   console.log("déconnexion");
   //   // sessionStorage.clear();
@@ -16,7 +18,7 @@ export default function Header() {
   //   // localStorage.removeItem();
   // };
   const cartDetails = useSelector((state) => state.cartDetails.value);
-  console.log(cartDetails);
+  console.log("cartDetails: ", cartDetails);
 
   let productCount = "";
   if (cartDetails.length > 0) {
@@ -24,21 +26,26 @@ export default function Header() {
       return acc + parseInt(product.qty);
     }, 0);
   }
+  const [search, setSearch] = useState("");
+  console.log("search: ", search);
+  useEffect(() => {
+    if (search.length >= 3) {
+      console.log();
+      console.log("search est sup à 3 caractères");
+      //rediriger vers une page résultats de recherche
+      navigate(`/Search/${search}`);
+    }
+  }, [search]);
+
   return (
     <>
       <Head>
-        <Title>
-          <a href="https://vitejs.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <Links to="/">
-            <MainTitle>The FakeStore</MainTitle>
-          </Links>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </Title>
         <NavBar>
+          <Title>
+            <Links to="/">
+              <MainTitle>The FakeStore</MainTitle>
+            </Links>
+          </Title>
           <Links to="/">Home</Links>
           <Links to="/electronics">electronics</Links>
           <Links to="/jewelery">jewelery</Links>
@@ -47,6 +54,13 @@ export default function Header() {
           {/* <Links to="/login">
             Sign In
           </Links> */}
+          <SearchBar>
+            <Input type="text" name="search" setValue={setSearch} />
+            <SearchIcon>
+              <Search />
+            </SearchIcon>
+          </SearchBar>
+
           <Links to="/Cart">
             <Button>
               <Cart />
@@ -84,7 +98,20 @@ const MainTitle = styled.h1`
 `;
 const NavBar = styled.div`
   margin: 10px;
+  display: flex;
+  align-items: center;
 `;
+
+const SearchBar = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SearchIcon = styled.span`
+  position: relative;
+  right: 1.5rem;
+`;
+
 const Links = styled(Link)`
   text-shadow: 1px 1px 2px rgb(18, 16, 7);
   color: rgb(245, 132, 39);

@@ -1,8 +1,17 @@
 // import "./../assets/css/Input.css";
 
 import { useState } from "react";
+import styled from "styled-components";
 
-export default function Input({ name, type, setValue, datas, min, max }) {
+export default function Input({
+  name,
+  type,
+  setValue,
+  datas,
+  label,
+  min,
+  max,
+}) {
   // cas d'un texte
   if (
     type === "text" ||
@@ -13,14 +22,16 @@ export default function Input({ name, type, setValue, datas, min, max }) {
     return (
       <>
         <div className="inputContainer">
-          <label className="inputLabel" htmlFor={`id_${name}`}>
-            {name} :{" "}
-          </label>
-          <input
+          {label && (
+            <label className="inputLabel" htmlFor={`id_${name}`}>
+              {name} :{" "}
+            </label>
+          )}
+          <InputStyled
             className="inputComponent"
             type={type}
             name={name}
-            placeholder={`Votre ${name}`}
+            placeholder={name}
             id={`id_${name}`}
             onChange={(e) => {
               setValue(e.target.value);
@@ -46,7 +57,7 @@ export default function Input({ name, type, setValue, datas, min, max }) {
             }}
             // checked={value === data}
           />{" "}
-          <label htmlFor={data}>{data}</label>
+          {label && <label htmlFor={data}>{data}</label>}
         </>
       );
     });
@@ -83,3 +94,17 @@ export default function Input({ name, type, setValue, datas, min, max }) {
   //   );
   // }
 }
+
+const InputStyled = styled.input`
+  padding: 4px 2px;
+  border: 3px solid rgb(166, 166, 249);
+  border-radius: 6px;
+  &:hover {
+    box-shadow: inset 4px 3px 4px rgba(0, 0, 255, 0.2),
+      1px 1px rgba(0, 0, 255, 0.2);
+  }
+  &:focus {
+    border: 3px solid rgb(116, 109, 164);
+    outline: none;
+  }
+`;

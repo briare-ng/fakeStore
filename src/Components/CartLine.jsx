@@ -20,7 +20,7 @@ function CartLine({ id, title, price, image, rating, qty }) {
     SetQuantity(e.target.value);
     dispatch(updateCart({ id: id, qty: e.target.value }));
   };
-
+  const subTotal = parseFloat(price*qty).toFixed(2);
   return (
     <>
       <Card>
@@ -40,7 +40,7 @@ function CartLine({ id, title, price, image, rating, qty }) {
             value={quantity}
           />
           <Price>=</Price>
-          <Price>{quantity * price}€</Price>
+          <Price>{subTotal}€</Price>
         </Sum>
         {/* <Btn > */}
         <Trash onClick={remove} />

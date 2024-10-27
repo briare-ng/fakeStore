@@ -14,7 +14,7 @@ function UserCart() {
       return acc + product.price * product.qty;
     }, 0);
   }
-  // total = parseInt(total).toFixed(2);
+  total = parseFloat(total).toFixed(2);
   let cartList = [];
   if (cartDetails.length > 0) {
     cartList = cartDetails.map((details, i) => {
@@ -26,7 +26,7 @@ function UserCart() {
 
   return (
     <>
-      <h1>Your Cart</h1>
+      <h1>Your Cart Details</h1>
       {cartList}
       <Price>Total = {total}€</Price>
       <Button
