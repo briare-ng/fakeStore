@@ -47,14 +47,14 @@ export default function Section({ section, url, isHome }) {
   } else if (!isLoaded) {
     return (
       <>
-        <h1 className="sectionTitle">{section}</h1>
+        <Title className="">{section.toUpperCase()}</Title>
         <Loader />
       </>
     );
   } else {
     return (
-      <div className="sectionContainer">
-        <h1 className="sectionTitle">{section}</h1>
+      <div>
+        <Title className="">{section.toUpperCase()}</Title>
         <CardList className="cardsList">{Productslist}</CardList>
       </div>
     );
@@ -64,4 +64,12 @@ export default function Section({ section, url, isHome }) {
 const CardList = styled.div`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+const Title = styled.h1`
+  font-weight: 600;
+  color: rgb(44, 34, 84);
+  text-shadow: 3px 4px 4px rgb(164, 165, 176);
+  margin-top: 2rem;
 `;

@@ -25,15 +25,15 @@ function ProductCard({ id, title, price, image, rating }) {
 
   return (
     <Card>
-      <Link to={`/Product/${id}`}>
+      <LinkTo to={`/Product/${id}`}>
         <Image src={image} alt={`${title}_picture`}></Image>
-        <Title>{title}</Title>
-        <Price>{price} €</Price>
-        <Rate>
-          rated {rating["rate"]}
+        <Title className="text-xs sm:text-sm md:text-lg">{title}</Title>
+        <Price className="text-base sm:text-lg md:text-2xl" >{price} €</Price>
+        <Rate className="text-xs sm:text-sm">
+          {rating["rate"]}
           <Stars width="1.5rem" height="1.5rem" /> /{rating["count"]} votes
         </Rate>
-      </Link>
+      </LinkTo>
       <Form onSubmit={handleAddToCart}>
         <Qty
           type="number"
@@ -57,6 +57,7 @@ export default ProductCard;
 
 const Card = styled.div`
   width: 25%;
+  min-width:250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -69,40 +70,46 @@ const Card = styled.div`
   transition-duration: 0.3s;
   &:hover {
     transform: scale(1.02);
+    color: #535bf2;
   }
+`;
+const LinkTo = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height:100%;
 `;
 
 const Image = styled.img`
   max-width: 150px;
   max-height: 250px;
-  flex: 1 1 0;
-  margin-top: 1rem;
+  width: 50%;
+  margin: 1rem;
 `;
 
-const Title = styled.p`
-  font-size: 1.2rem;
+const Title = styled.h1`
   font-weight: 600;
   color: rgb(44, 34, 84);
   text-shadow: 3px 3px 5px rgb(164, 165, 176);
-  flex: 1 1 0;
+  &:hover {
+    color: #535bf2;
+  }
 `;
 
 const Rate = styled.p`
   display: flex;
   color: rgb(44, 34, 84);
-  font-size: 0.8rem;
+
   font-weight: 400;
   align-items: center;
   justify-content: center;
-  flex: 1 1 0;
 `;
 
 const Price = styled.p`
-  font-size: 1.5rem;
   font-weight: 800;
   margin: 0;
   color: rgb(84, 64, 160);
-  flex: 1 1 0;
 `;
 
 const Form = styled.form`
@@ -112,12 +119,11 @@ const Form = styled.form`
   align-items: end;
   gap: 0.5rem;
   height: auto;
-  flex: 1 1 0;
 `;
 const Qty = styled.input`
-  height: 1.2rem;
+  height: 1.7rem;
   width: 3rem;
-  border: 1px solid rgb(163, 163, 204);
+  border: 2px solid rgb(163, 163, 204);
   border-radius: 4px;
   padding: 0.2rem;
   text-align: center;

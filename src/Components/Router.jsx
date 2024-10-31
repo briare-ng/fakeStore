@@ -9,6 +9,7 @@ import ProductPage from "./ProductPage";
 import Footer from "./Footer";
 import Login from "./Login";
 import SearchResults from "./SearchResults";
+import NavbarTest from "./NavbarTest";
 
 const Router = () => {
   const categories = [
@@ -33,7 +34,8 @@ const Router = () => {
   });
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
+      <NavbarTest />
       <Routes>
         <Route path="/" element={<Home urls={urls} />} />
         <Route path="/Product/:id" element={<ProductPage />} />

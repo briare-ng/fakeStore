@@ -57,13 +57,13 @@ function SearchResults() {
     );
   } else {
     return (
-      <>
+      <div>
         <h1>Search results for : "{search}"</h1>
         {searchResults.length == [] && (
           <p>pas de résultats pour cette recherche</p>
         )}
         {searchResults.length >= 1 && <CardList>{Productslist}</CardList>}
-      </>
+      </div>
     );
   }
 }
@@ -73,4 +73,5 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
 `;

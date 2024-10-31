@@ -20,17 +20,19 @@ function CartLine({ id, title, price, image, rating, qty }) {
     SetQuantity(e.target.value);
     dispatch(updateCart({ id: id, qty: e.target.value }));
   };
-  const subTotal = parseFloat(price*qty).toFixed(2);
+  const subTotal = parseFloat(price * qty).toFixed(2);
   return (
     <>
-      <Card>
+      <Card className="flex flex-row justify-between items-center p-1">
         <Image src={image} alt={`${title}_picture`}></Image>
         <Title>
-          <Link to={`/Product/${id}`}>{title}</Link>
+          <Link className="text-xs sm:text-sm md:text-lg m-1 p-1" to={`/Product/${id}`}>
+            {title}
+          </Link>
         </Title>
-        <Sum>
-          <Price>{price}€</Price>
-          <Price> x </Price>
+        <Sum className="flex flex-col sm:flex-row justify-center items-center">
+          <Price className="text-xs sm:text-base md:text-xl">{price}€</Price>
+          <Price>&nbsp;x&nbsp;</Price>
           <Qty
             type="number"
             name="qty"
@@ -40,7 +42,7 @@ function CartLine({ id, title, price, image, rating, qty }) {
             value={quantity}
           />
           <Price>=</Price>
-          <Price>{subTotal}€</Price>
+          <Price className="text-sm sm:text-lg md:text-2xl">{subTotal}€</Price>
         </Sum>
         {/* <Btn > */}
         <Trash onClick={remove} />
@@ -53,12 +55,8 @@ function CartLine({ id, title, price, image, rating, qty }) {
 export default CartLine;
 
 const Card = styled.div`
-  width: 75%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.1rem;
+  width: 80%;
+  min-width:300px
   border-radius: 4px;
   margin-bottom: 1rem;
   box-shadow: inset 4px 3px 4px rgba(0, 0, 255, 0.2),
@@ -72,26 +70,24 @@ const Card = styled.div`
 const Image = styled.img`
   max-width: 100px;
   max-height: 100px;
-
-  margin: 0 1rem;
+  margin: .3rem 1rem;
 `;
 
 const Title = styled.p`
-  font-size: 1.2rem;
   font-weight: 600;
   color: rgb(44, 34, 84);
   text-shadow: 3px 3px 5px rgb(164, 165, 176);
   width: 30%;
 `;
 const Sum = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35%;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // width: 35%;
 `;
 
 const Price = styled.p`
-  font-size: 1.2rem;
+  // font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0.5rem;
   color: rgb(84, 64, 160);

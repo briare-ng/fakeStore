@@ -28,22 +28,25 @@ export default function Header() {
   }
   const [search, setSearch] = useState("");
   console.log("search: ", search);
-  useEffect(() => {
-    if (search.length >= 3) {
-      console.log();
-      console.log("search est sup à 3 caractères");
-      //rediriger vers une page résultats de recherche
-      navigate(`/Search/${search}`);
-    }
-  }, [search]);
+  const handleSearchSubmit = () => {
+    navigate(`/Search/${search}`);
+  };
+  // useEffect(() => {
+  //   if (search.length >= 3) {
+  //     console.log();
+  //     console.log("search est sup à 3 caractères");
+  //     //rediriger vers une page résultats de recherche
+  //     navigate(`/Search/${search}`);
+  //   }
+  // }, [search]);
 
   return (
     <>
       <Head>
-        <NavBar>
+        <NavBar className="absolute inset-x-0 top-0 w-full w-100 px-8 md:px-auto">
           <Title>
             <Links to="/">
-              <MainTitle>The FakeStore</MainTitle>
+              <MainTitle>The&nbsp;FakeStore</MainTitle>
             </Links>
           </Title>
           <Links to="/">Home</Links>
@@ -54,12 +57,14 @@ export default function Header() {
           {/* <Links to="/login">
             Sign In
           </Links> */}
-          <SearchBar>
-            <Input type="text" name="search" setValue={setSearch} />
-            <SearchIcon>
-              <Search />
-            </SearchIcon>
-          </SearchBar>
+          <form onSubmit={handleSearchSubmit}>
+            <SearchBar>
+              <Input type="text" name="search" setValue={setSearch} />
+              <SearchButton type="submit">
+                <Search />
+              </SearchButton>
+            </SearchBar>
+          </form>
 
           <Links to="/Cart">
             <Button>
@@ -82,7 +87,7 @@ const Head = styled.div`
   justify-content: center;
   align-items: center;
   background: linear-gradient(#e5e5eb, #b1b6d3);
-  width: 100%;
+  width: 100vw;
   position: absolute;
   top: 0;
 `;
@@ -107,11 +112,12 @@ const SearchBar = styled.div`
   align-items: center;
 `;
 
-const SearchIcon = styled.span`
+const SearchButton = styled.button`
+  background: none;
+  border: none;
   position: relative;
-  right: 1.5rem;
+  right: 3rem;
 `;
-
 const Links = styled(Link)`
   text-shadow: 1px 1px 2px rgb(18, 16, 7);
   color: rgb(245, 132, 39);
@@ -121,13 +127,13 @@ const Links = styled(Link)`
   }
 `;
 const Button = styled.button`
-  box-shadow: inset 4px 3px 4px rgba(0, 0, 255, 0.2),
-    1px 1px rgba(0, 0, 255, 0.2);
+  box-shadow: 1px 1px rgba(0, 0, 255, 0.2);
+  position: relative;
   padding: 0.5rem 0.8rem;
   border: 1px solid rgba(0, 0, 255, 0.2);
   transition-duration: 0.3s;
   &:hover {
-    border: 1px solid rgb(134, 138, 160);
+    border: 2px solid rgb(134, 138, 160);
     transform: scale(1.05);
   }
 `;
@@ -138,9 +144,9 @@ const Badge = styled.span`
   font-size: 0.6rem;
   color: #ffff;
   font-weight: 600;
-  position: relative;
-  bottom: 0.6rem;
-  right: 0.3rem;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 0.4rem;
   background-color: #d64852;
   border-radius: 50%;
 `;

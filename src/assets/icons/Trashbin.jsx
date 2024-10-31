@@ -4,8 +4,8 @@ export function Trashbin(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1.3em"
-      height="1.3em"
+      width="2rem"
+      height="2rem"
       viewBox="0 0 512 512"
       {...props}
     >

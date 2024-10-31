@@ -96,6 +96,7 @@ export default function Input({
 }
 
 const InputStyled = styled.input`
+  text-align: center;
   padding: 4px 2px;
   border: 3px solid rgb(166, 166, 249);
   border-radius: 6px;

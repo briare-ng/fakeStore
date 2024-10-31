@@ -8,9 +8,13 @@ function Footer() {
       <a href="https://vitejs.dev" target="_blank">
         <img src={viteLogo} className="logo" alt="Vite logo" />
       </a>
-      <a href="https://brnguyen.fr" target="_blank">
+      <div> <a href="https://brnguyen.fr" target="_blank">
         made by brnguyen
       </a>
+      <a href="https://fakestoreapi.com" target="_blank">
+        &nbsp;with the fakestoreapi
+      </a></div>
+     
       <a href="https://react.dev" target="_blank">
         <img src={reactLogo} className="logo react" alt="React logo" />
       </a>
@@ -28,5 +32,4 @@ const Foot = styled.div`
   width: 100vw;
   margin-top: 60px;
   padding: 1rem 0;
-  
 `;
