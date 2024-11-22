@@ -2,6 +2,8 @@
 
 import styled from "styled-components";
 import Section from "./Section";
+import tree from "../assets/img/tree.jpg"
+import basket from "../assets/img/basket.jpg"
 
 export default function Home({ urls }) {
   const content = Object.keys(urls).map((key, i) => {
@@ -10,7 +12,7 @@ export default function Home({ urls }) {
   return (
     <>
       <Title>Welcome to the FakeStore !</Title>
-      <img src="" alt="" />
+      <Image src={tree} alt="" />
       {content}
     </>
   );
@@ -21,4 +23,10 @@ font-size: 2.5rem;
   color: rgb(44, 34, 84);
   text-shadow: 4px 3px 4px rgb(164, 165, 176);
   margin-top: 2rem;
+`;
+const Image = styled.img`
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  opacity: 0.4;
 `;

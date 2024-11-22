@@ -56,7 +56,7 @@ export default function Input({
               setValue(e.target.value);
             }}
             // checked={value === data}
-          />{" "}
+          />
           {label && <label htmlFor={data}>{data}</label>}
         </>
       );

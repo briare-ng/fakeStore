@@ -6,6 +6,7 @@ import { Search } from "../assets/icons/Search";
 import Cart from "../assets/icons/Cart";
 import { useSelector } from "react-redux";
 import { Toggler } from "../assets/icons/Toggler";
+import { useEffect } from "react";
 
 function NavbarTest() {
   const [search, setSearch] = useState("");
@@ -25,6 +26,19 @@ function NavbarTest() {
   const handleToggler = () => {
     SetShowNav(!showNav);
   };
+//gestion du clic hors du menu mobile
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!event.target.closest('.mobileNav')) {
+        SetShowNav(false);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <>
       <nav className="relative top-0 w-screen bg-gradient-to-b from-[#e5e5eb] to-[#b1b6d3]">
@@ -75,13 +89,13 @@ function NavbarTest() {
         </div>
         {/* Mobile navigation btn */}
         <div
-          className={`fixed top-0 right-0 p-2 flex flex-col justify-between items-center transition-width duration-300 ease-in-out rounded lg:hidden z-10 ${
+          className={`mobileNav fixed top-0 right-0 p-2 flex flex-col justify-between items-center transition-width duration-300 ease-in-out rounded lg:hidden z-10 ${
             showNav
               ? "h-1/2 w-64 bg-gradient-to-b from-[#e5e5eb] to-[#b1b6d3]"
               : "h-20 w-20"
           }`}
         >
-          <button className="bg-white bg-opacity-40 border-none hover:bg-opacity-90" onClick={handleToggler}>
+          <button className="bg-white bg-opacity-40 border-none hover:bg-opacity-90 px-2 py-1.5 sm:px-3 sm:py-2" onClick={handleToggler}>
             <Toggler />
           </button>
           <Links to="/Cart">

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { emptyCart } from "../reducers/cartDetails";
 import styled from "styled-components";
 import { Broom } from "../assets/icons/Broom";
+import CheckoutPage from "./CheckoutPage";
 
 function UserCart() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function UserCart() {
     }, 0);
   }
   total = parseFloat(total).toFixed(2);
+
   let cartList = [];
   if (cartDetails.length > 0) {
     cartList = cartDetails.map((details, i) => {
@@ -27,7 +29,7 @@ function UserCart() {
 
   return (
     <>
-      <h1>Your Cart Details</h1>
+      <Title>Your Cart Details</Title>
       {cartList}
       <Price className="text-lg sm:text-2xl md:text-3xl">Total = {total}€</Price>
       <Button
@@ -38,6 +40,7 @@ function UserCart() {
         Clear Cart
         <Broom />
       </Button>
+      <CheckoutPage/>
     </>
   );
 }
@@ -63,4 +66,10 @@ const Button = styled.button`
     border: 2px solid rgb(134, 138, 160);
     transform: scale(1.05);
   }
+`;
+const Title = styled.h1`
+  font-weight: 600;
+  color: rgb(44, 34, 84);
+  text-shadow: 3px 4px 4px rgb(164, 165, 176);
+  margin-top: 2rem;
 `;

@@ -11,7 +11,7 @@ export function Toggler(props) {
     >
       <path
         fill="none"
-        stroke="#3137f2"
+        stroke="#7a7a99"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
