@@ -40,7 +40,7 @@ function UserCart() {
         Clear Cart
         <Broom />
       </Button>
-      <CheckoutPage/>
+      {/* <CheckoutPage/> */}
     </>
   );
 }
